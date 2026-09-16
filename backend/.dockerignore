@@ -1,0 +1,7 @@
+.git
+.env
+.env.*
+*.db
+bin/
+tmp/
+*.log

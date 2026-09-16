@@ -2,6 +2,8 @@ package database
 
 import (
 	"log"
+	"os"
+	"path/filepath"
 
 	"github.com/kayukwas/tracking-backend/config"
 	"github.com/kayukwas/tracking-backend/internal/models"
@@ -15,6 +17,9 @@ func InitDB(cfg *config.Config) (*gorm.DB, error) {
 
 	switch cfg.DBDriver {
 	case "sqlite":
+		if dir := filepath.Dir(cfg.DBName); dir != "" && dir != "." {
+			_ = os.MkdirAll(dir, 0755)
+		}
 		dialector = sqlite.Open(cfg.DBName)
 	default:
 		dialector = sqlite.Open(cfg.DBName)

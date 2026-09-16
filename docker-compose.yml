@@ -1,0 +1,52 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: kayukwas-backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - DB_DRIVER=sqlite
+      - DB_NAME=/app/data/kayukwas.db
+      - JWT_SECRET=${JWT_SECRET:-super-secret-jwt-key-for-kayukwas-production-2026}
+      - APP_URL=${APP_URL:-http://localhost:3000}
+      - AI_PROVIDER=${AI_PROVIDER:-gemini}
+      - AI_MODEL=${AI_MODEL:-gemini-1.5-flash}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - OPENWA_URL=${OPENWA_URL:-https://openwaha.kayukwas.co.id/api}
+      - OPENWA_SESSION_ID=${OPENWA_SESSION_ID:-5ab1774b-97a5-4656-96b7-52ca8a3a96bf}
+      - OPENWA_API_KEY=${OPENWA_API_KEY:-owa_k1_d91008176a7d4d1ea371d721dda7cef9de1594f2cba38287d2b8f5cbca2564c0}
+      - OPENWA_WEBHOOK_SECRET=${OPENWA_WEBHOOK_SECRET:-kayukwas-openwa-webhook-secret-2026}
+    volumes:
+      - kayukwas-db-data:/app/data
+    networks:
+      - kayukwas-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8080/api/v1}
+    container_name: kayukwas-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8080/api/v1}
+    depends_on:
+      - backend
+    networks:
+      - kayukwas-network
+
+volumes:
+  kayukwas-db-data:
+
+networks:
+  kayukwas-network:
+    driver: bridge

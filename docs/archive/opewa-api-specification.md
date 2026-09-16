@@ -6,18 +6,15 @@
 
 Every REST route is mounted under the global `api` prefix:
 
-```
-http://<host>:2785/api
-```
-
-For local development that is `http://localhost:2785/api`; behind a reverse proxy substitute your public origin (the `/api` prefix is unchanged).
+- **Production/Staging:** `https://openwaha.kayukwas.co.id/api`
+- **Local Development:** `http://localhost:2785/api`
 
 ### Authentication
 
 A global API-key guard protects every route unless it is explicitly marked **public** (`@Public()`). Send the key in the `X-API-Key` header:
 
 ```http
-X-API-Key: owa_k1_your-api-key-here
+X-API-Key: owa_k1_d91008176a7d4d1ea371d721dda7cef9de1594f2cba38287d2b8f5cbca2564c0
 ```
 
 > **Auth is header-only (never in a URL).** A query-parameter API key is **not** accepted anywhere. REST routes take the key via the `X-API-Key` header; the WebSocket (Socket.IO) handshake — see §6.5 Real-time API — accepts it via the handshake `auth.apiKey` field or the `X-API-Key` header. The former `?apiKey=` query fallback was **removed** (it leaked the credential into proxy/access logs). Never put the key in a URL.
@@ -27,7 +24,7 @@ The metrics endpoint is the lone exception to the API-key scheme: it authenticat
 ### Common Headers
 
 ```http
-X-API-Key: owa_k1_your-api-key      # required on every non-public REST route
+X-API-Key: owa_k1_d91008176a7d4d1ea371d721dda7cef9de1594f2cba38287d2b8f5cbca2564c0      # required on every non-public REST route
 Content-Type: application/json       # required on requests with a JSON body
 ```
 

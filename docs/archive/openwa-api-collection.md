@@ -5,11 +5,11 @@
 This collection gives a runnable cURL for the primary OpenWA REST endpoints; the complete route list lives in `openapi.json` at the repository root. The Swagger UI at `/api/docs` serves the same schema, but it defaults off under `NODE_ENV=production` — set `ENABLE_SWAGGER=true` to serve it there. The examples assume two environment variables — set them once and reuse them:
 
 ```bash
-export BASE=http://localhost:2785
-export API_KEY=owa_k1_your-api-key-here
+export BASE=https://openwaha.kayukwas.co.id
+export API_KEY=owa_k1_d91008176a7d4d1ea371d721dda7cef9de1594f2cba38287d2b8f5cbca2564c0
 ```
 
-(For the metrics endpoint also `export METRICS_TOKEN=...`.)
+(For local development use `export BASE=http://localhost:2785`.)
 
 ### Authentication
 
@@ -32,10 +32,10 @@ Sessions · Messages · Webhooks · Groups · Contacts · Chats · Labels · Cha
 
 All examples assume `BASE` and `API_KEY` are exported (see 07.1). Paths are prefixed with `/api`.
 
-The `:sessionId` path segment is always the session **UUID** returned by `POST /api/sessions` — never the session name. Session routes (07.3) use `:id` for that same UUID; everywhere else `:id` is a different resource's id — a template, webhook, API key or plugin — and never a session. Export the session UUID once alongside the other variables:
+The `:sessionId` path segment is always the session **UUID** returned by `POST /api/sessions` — never the session name. Session routes (07.3) use `:id` for that same UUID; everywhere else `:id` is a different resource's id — a template, webhook, API key or plugin — dan never a session. Export the session UUID once alongside the other variables:
 
 ```bash
-export SESSION_ID=8f3c2b1a-9d4e-4c7a-8b2f-1e6d5a4c3b2a
+export SESSION_ID=5ab1774b-97a5-4656-96b7-52ca8a3a96bf
 ```
 
 ### 07.3 Sessions

@@ -104,7 +104,8 @@ Untuk menjaga integritas dan tata kelola akun, sistem membatasi wewenang adminis
 1. **Hak Istimewa Superuser (Superuser Bypass):**
    - Jika pengguna memiliki jabatan `Superuser`, fungsi otorisasi (`hasPermission()`) otomatis mengembalikan nilai `true`. Superuser memegang kendali penuh atas seluruh fitur dan modul tanpa perlu pemetaan izin satu per satu secara manual.
 2. **Penggabungan Izin Multi-Role (Union Permissions):**
-   - Karyawan yang mengemban lebih dari satu jabatan otomatis memperoleh **akumulasi/gabungan (union)** dari seluruh hak akses yang terdaftar pada setiap peran yang diembannya.
+   - Karyawan yang mengemban lebih dari satu jabatan otomatis 
+   memperoleh **akumulasi/gabungan (union)** dari seluruh hak akses yang terdaftar pada setiap peran yang diembannya.
 3. **Pemisahan Lapisan Otoritas dan Lapisan Data Transaksi:**
    - Hak akses `permissions` mengontrol siapa yang berhak mengakses fungsi administratif dan operasional (lapisan aplikasi).
    - Perubahan konfigurasi nama izin di kemudian hari tidak akan merusak arsip data historis maupun catatan audit yang telah tercatat sebelumnya.
